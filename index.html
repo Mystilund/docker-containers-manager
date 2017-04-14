@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- STYLE -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <!-- SCRIPT -->
+    <script src="./render_script/main.js"></script>
+  </head>
+  <body>
+    <h1>Container manager</h1>
+    <div id="content"></div>
+    <div id="template">
+      <div class="row" id="container-{{name}}">
+        <div class="small-9 columns">
+          <h2>{{name}}</h2>
+          <h6>{{path}}</h6>
+        </div>
+        <div class="small-3 columns text-right">
+          <div class="switch">
+            <input class="switch-input" id="state-{{name}}" type="radio" {{ischecked}} name="state-{{name}}" value="1">
+            <label class="switch-paddle state-switch" for="state-{{name}}">
+              <span class="show-for-sr">Actif</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var ipc = require('electron').ipcRenderer;
+      var renderElement = new RenderClass(document.getElementById('content'));
+
+      ipc.on('docker_data', function(event, response){
+        renderElement.update(response);
+      });
+      ipc.on('error-on-ps', function(event, response){
+        console.log('ERROR')
+      });
+    </script>
+  </body>
+</html>
