@@ -7,38 +7,36 @@ function RenderClass(element) {
     if (_private.el === null) { return; }
 
     for (var container of data) {
-      newLine = document.getElementById('template').cloneNode(true);
-
+      var isChecked = (container.state === 'Up')
+      var newLine = document.getElementById('template').cloneNode(true);
+      var lineIfExist = document.getElementById('container-' + container.name)
+      
       newLine.innerHTML = newLine.innerHTML
           .replace(/{{name}}/g, container.name)
           .replace(/{{path}}/g, container.path)
-          .replace(/{{ischecked}}/g, container.state === 'Up' ? 'checked' : '')
-      if (document.getElementById('container-' + container.name)) {
-        var toDelete = document.getElementById('container-' + container.name)
-        toDelete.insertAdjacentHTML('afterend', newLine.innerHTML)
-        toDelete.parentElement.removeChild(toDelete)
-      } else {
-        _private.el.insertAdjacentHTML('afterend', newLine.innerHTML)
+          .replace(/{{ischecked}}/g, isChecked ? 'checked' : '')
+
+      if (lineIfExist && lineIfExist.querySelector('input').checked !== isChecked) {
+        lineIfExist.querySelector('input').checked = !lineIfExist.querySelector('input').checked
+      } else if (!lineIfExist) {
+        _private.el.insertAdjacentHTML('beforeend', newLine.innerHTML)
+        _private.bindSwitch('container-' + container.name)
       }
-      _private.bindSwitchs()
     }
   }
 
-  _private.bindSwitchs = function () {
-    var switchs = _private.el.querySelectorAll('#content .switch')
+  _private.bindSwitch = function (container_id) {
+    var container = document.getElementById(container_id)
+    var label = container.querySelector('.state-switch')
+    var input = container.querySelector('input')
 
-    for (var state_switch of switchs) {
-      var label = state_switch.querySelector('.state-switch')
-      var input = state_switch.querySelector('input')
-
-      label.onclick = function () {
-        var name = label.getAttribute('for').replace(/state-/, '')
-        ipc.send('switch-state', {
-          name: name,
-          value: !input.checked
-        })
-        return false
-      }
+    label.onclick = function () {
+      var name = this.getAttribute('for').replace(/state-/, '')
+      ipc.send('switch-state', {
+        name: name,
+        value: !input.checked
+      })
+      return false
     }
   }
 
