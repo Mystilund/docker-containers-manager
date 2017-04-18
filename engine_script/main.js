@@ -47,7 +47,9 @@ function dockerLoop () {
  * Send the docker informations
  */
 function setDockerInformation () {
-  window_reference.webContents.send('docker_data', docker_list);
+  if (window_reference && docker_list) {
+    window_reference.webContents.send('docker_data', docker_list);
+  }
 }
 
 /**

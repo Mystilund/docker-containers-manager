@@ -9,7 +9,16 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({title: 'my app', autoHideMenuBar: true, width: 800, height: 600, backgroundColor: '#333' })
+  win = new BrowserWindow({
+    title: 'Docker Containers Manager',
+    autoHideMenuBar: true,
+    width: 1280,
+    height: 720,
+    backgroundColor: '#333',
+    frame: false,
+    icon: __dirname + '/assets/images/DCM.ico',
+    titleBarStyle: 'hidden'
+  })
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -36,6 +45,22 @@ function createWindow () {
 app.on('ready', () => {
   createWindow();
   engine_entrypoint.start(win);
+
+  var ipc = require('electron').ipcMain
+
+  ipc.on('maximize-window', function (event, data) {
+    if (win.isMaximized()) {
+      win.unmaximize()
+    } else {
+      win.maximize()
+    }
+  });
+  ipc.on('minimize-window', function (event, data) {
+    win.minimize()
+  });
+  ipc.on('close-window', function (event, data) {
+    win.close()
+  });
 });
 
 // Quit when all windows are closed.

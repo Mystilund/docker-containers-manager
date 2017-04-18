@@ -11,6 +11,7 @@ function RenderClass(element, filter) {
    */
   this.update = function (data) {
     if (_private.el === null) { return; }
+    var isEmpty = !_private.el.children.length
 
     for (var container of data) {
       var isChecked = (container.state === 'Up')
@@ -30,6 +31,10 @@ function RenderClass(element, filter) {
         _private.bindSwitch('container-' + container.name)
       }
       _private.filter.updateRows()
+    }
+
+    if (isEmpty && !!_private.el.children.length) {
+      document.getElementById('loader').style.display = 'none';
     }
   }
 

@@ -1,0 +1,157 @@
+body {
+  color: white;
+  font-family: 'Lato';
+  background: #333;
+}
+
+body::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+body::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 8px solid #6feded;
+  border-radius: 96px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #6feded;
+}
+body::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+body::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px solid #b2b2b2;
+  border-radius: 92px;
+}
+body::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+body::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+#template {
+  display: none;
+}
+
+.row:hover {
+  background: #444
+}
+
+h2 {
+  font-size: 20px;
+  color: white;
+}
+
+h6 {
+  font-size: 12px;
+  color: #CCC;
+}
+
+.switch {
+  height: 60px;
+  line-height: 60px;
+}
+
+.switch label {
+  vertical-align: middle;
+}
+
+button.button {
+  margin-bottom: 0;
+}
+
+#filters {
+  border-bottom: 2px solid #1779ba;
+}
+
+.bug-report {
+  font-size:12px;
+  padding-right: 15px;
+}
+
+.bug-report a {
+  color: white;
+}
+
+.window-buttons {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  background: #333;
+}
+
+.window-buttons > div {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  margin: 3px 5px;
+  border: 1px outset black;
+  cursor: pointer;
+  float: left;
+  position: relative;
+}
+
+.window-buttons > div:hover {
+  width: 15px;
+  height: 15px;
+  transform: scale(1.2);
+}
+
+#close-window {
+  border: 0;
+}
+
+#close-window::before {
+  background: #CC3333;
+  position: absolute;
+  display: block;
+  content: '';
+  width: 100%;
+  height: 15%;
+  top: 43%;
+  left: 0%;
+  transform: rotate(45deg)
+} 
+#close-window::after {
+  background: #CC3333;
+  position: absolute;
+  display:block;
+  content:'';
+  width: 15%;
+  height: 100%;
+  left: 43%;
+  top: 0%;
+  transform: rotate(45deg);
+}
+
+#maximize-window {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: #fdb060;
+}
+
+#maximize-window:hover {
+  border-color: #f78d20;
+}
+
+#minimize-window {
+  margin-top: 15px;
+  border-radius: 0;
+  border-width: 2px;
+  height: 1px;
+  border-color: #54d2d2;
+}
+
+#minimize-window:hover {
+  border-color: #1fecec;
+}
