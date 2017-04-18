@@ -5,6 +5,10 @@ let docker_list;
 let interval;
 let window_reference;
 
+/**
+ * The entrypoint
+ * @param  {object} La fenetre de jeu
+ */
 module.exports = {
   start: (win) => {
     window_reference = win
@@ -14,6 +18,12 @@ module.exports = {
   }
 }
 
+
+/**
+ * Call the "docker ps". In a set interval
+ * Success : Update informations
+ * Error   : Notify the error and clear the interval
+ */
 function dockerLoop () {
   process_engine.createProcess(
     'docker',
@@ -33,10 +43,16 @@ function dockerLoop () {
   )
 }
 
+/**
+ * Send the docker informations
+ */
 function setDockerInformation () {
   window_reference.webContents.send('docker_data', docker_list);
 }
 
+/**
+ * Initialize the states of the containers and create the loop of "docker ps"
+ */
 function getDockerInformation () {
   for (var docker_item in docker_list) {
     docker_item.state = 'Down'
@@ -46,6 +62,9 @@ function getDockerInformation () {
   dockerLoop()
 }
 
+/**
+ * Use the return of docker ps to get informations
+ */
 function parseDocker (data) {
   var lines = data
   lines = lines.split("\n")
@@ -76,10 +95,21 @@ function parseDocker (data) {
   }
 }
 
+/**
+ * Check if the state is different than before
+ * @param  {string} item  The current state
+ * @param  {value}  value The state received by the core
+ * @return {[Boolean]}
+ */
 function notSameState (item, value) {
   return (item === 'Up' && !value) || (item === 'Down' && value)
 }
 
+
+/**
+ * Bind a switch to send data to the core
+ * @return {[Boolean]}
+ */
 function bindUserInputs () {
   var ipc = require('electron').ipcMain
 

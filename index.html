@@ -6,12 +6,23 @@
     <!-- STYLE -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/loader.css" rel="stylesheet">
     <!-- SCRIPT -->
     <script src="./render_script/main.js"></script>
+    <script src="./render_script/filters.js"></script>
   </head>
   <body>
-    <h1>Container manager</h1>
+    <header>
+      <h1 class="text-center">Container manager</h1>
+    </header>
+    <nav>
+      <div id="filters">
+        <button class="button primary" data-value="all">All</button>
+        <button class="button secondary" data-value="active">Active</button>
+        <button class="button secondary" data-value="inactive">Inactive</button>
+      </div>
+    </nav>
     <div id="content"></div>
     <div id="template">
       <div class="row" id="container-{{name}}">
@@ -21,6 +32,16 @@
         </div>
         <div class="small-3 columns text-right">
           <div class="switch">
+            <div id="circular_spinner">
+              <div id="circular_spinner_1" class="circular_spinner"></div>
+              <div id="circular_spinner_2" class="circular_spinner"></div>
+              <div id="circular_spinner_3" class="circular_spinner"></div>
+              <div id="circular_spinner_4" class="circular_spinner"></div>
+              <div id="circular_spinner_5" class="circular_spinner"></div>
+              <div id="circular_spinner_6" class="circular_spinner"></div>
+              <div id="circular_spinner_7" class="circular_spinner"></div>
+              <div id="circular_spinner_8" class="circular_spinner"></div>
+            </div>
             <input class="switch-input" id="state-{{name}}" type="radio" {{ischecked}} name="state-{{name}}" value="1">
             <label class="switch-paddle state-switch" for="state-{{name}}">
               <span class="show-for-sr">Actif</span>
@@ -31,7 +52,8 @@
     </div>
     <script>
       var ipc = require('electron').ipcRenderer;
-      var renderElement = new RenderClass(document.getElementById('content'));
+      var filterElement = new FiltersClass();
+      var renderElement = new RenderClass(document.getElementById('content'), filterElement);
 
       ipc.on('docker_data', function(event, response){
         renderElement.update(response);
