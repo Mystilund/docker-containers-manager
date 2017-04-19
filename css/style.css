@@ -1,6 +1,9 @@
+* {
+  font-family: 'Lato' !important;
+}
+
 body {
   color: white;
-  font-family: 'Lato';
   background: #333;
 }
 
@@ -38,16 +41,32 @@ body::-webkit-scrollbar-corner {
   background: transparent;
 }
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  width: 100%;
+  background: #333;
+  z-index: 3;
+}
+
+#content {
+  margin-top: 120px;
+}
+
 #template {
   display: none;
 }
 
 .row:hover {
-  background: #444
+  background: #444;
+  box-shadow: black 0px 2px 10px;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 22px;
   color: white;
 }
 
@@ -88,6 +107,7 @@ button.button {
   right: 0;
   padding: 15px;
   background: #333;
+  z-index: 5;
 }
 
 .window-buttons > div {

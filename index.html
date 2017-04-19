@@ -14,19 +14,19 @@
   <body>
     <header>
       <h1 class="text-center">Container manager</h1>
+      <nav>
+        <div class="window-buttons clearfix">
+          <div id="minimize-window"></div>
+          <div id="maximize-window"></div>
+          <div id="close-window"></div>
+        </div>
+        <div id="filters">
+          <button class="button primary" data-value="all">All</button>
+          <button class="button secondary" data-value="active">Active</button>
+          <button class="button secondary" data-value="inactive">Inactive</button>
+        </div>
+      </nav>
     </header>
-    <nav>
-      <div class="window-buttons clearfix">
-        <div id="minimize-window"></div>
-        <div id="maximize-window"></div>
-        <div id="close-window"></div>
-      </div>
-      <div id="filters">
-        <button class="button primary" data-value="all">All</button>
-        <button class="button secondary" data-value="active">Active</button>
-        <button class="button secondary" data-value="inactive">Inactive</button>
-      </div>
-    </nav>
     <div id="content"></div>
     <div id="loader">
       <div class="cube_loader">
@@ -64,9 +64,7 @@
       </div>
     </div>
     <div class="text-right bug-report">
-      <span>Found a bug ? Report it </span>
-      <a href="https://github.com/FlorianDewulf/docker-containers-manager/issues">here</a>
-      <span> !</span>
+      <a href="https://github.com/FlorianDewulf/docker-containers-manager/issues">Found a bug ? Report it here !</a>
     </div>
     <script>
       var ipc = require('electron').ipcRenderer;
